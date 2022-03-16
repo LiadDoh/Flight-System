@@ -1,5 +1,6 @@
 package Models;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Flights implements POCO{
@@ -8,11 +9,11 @@ public class Flights implements POCO{
     public long airlineCompanyId;
     public int originCountryId;
     public int destinationCountryId;
-    public LocalDateTime departureTime;
-    public LocalDateTime landingTime;
+    public Timestamp departureTime;
+    public Timestamp landingTime;
     public int remainingTickets;
 
-    public Flights(long id, long airlineCompanyId, int originCountryId, int destinationCountryId, LocalDateTime departureTime, LocalDateTime landingTime, int remainingTickets) {
+    public Flights(long id, long airlineCompanyId, int originCountryId, int destinationCountryId, Timestamp departureTime, Timestamp landingTime, int remainingTickets) {
         this.id = id;
         this.airlineCompanyId = airlineCompanyId;
         this.originCountryId = originCountryId;

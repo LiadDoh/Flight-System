@@ -11,7 +11,7 @@ CREATE TABLE "User_Roles"(
 	PRIMARY KEY("id")
 );
 
-CREATE TABLE Users(
+CREATE TABLE "Users"(
 	"id" bigint GENERATED ALWAYS AS IDENTITY,
 	"username" text UNIQUE NOT NULL,
 	"password" text NOT NULL,
