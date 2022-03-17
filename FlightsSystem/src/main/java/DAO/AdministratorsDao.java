@@ -26,9 +26,9 @@ public class AdministratorsDao implements DAO<Administrators>{
             rs.next();
             administrator = new Administrators(
                     rs.getInt("id"),
-                    rs.getString("firstName"),
-                    rs.getString("lastName"),
-                    rs.getLong("userId")
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getLong("user_id")
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,9 +43,9 @@ public class AdministratorsDao implements DAO<Administrators>{
             while (rs.next()) {
                 Administrators administrator = new Administrators(
                         rs.getInt("id"),
-                        rs.getString("firstName"),
-                        rs.getString("lastName"),
-                        rs.getLong("userId")
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getLong("user_id")
                 );
                 administrators.add(administrator);
             }
@@ -59,7 +59,7 @@ public class AdministratorsDao implements DAO<Administrators>{
     @Override
     public void add(Administrators administrators) {
         try {
-            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (firstName, lastName, userId) VALUES ('" + administrators.firstName + "', '" + administrators.lastName + "', " + administrators.userId + ")");
+            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (first_name, last_name, user_id) VALUES ('" + administrators.firstName + "', '" + administrators.lastName + "', " + administrators.userId + ")");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +68,7 @@ public class AdministratorsDao implements DAO<Administrators>{
     @Override
     public void update(Administrators administrators) {
         try {
-            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET firstName = '" + administrators.firstName + "', lastName = '" + administrators.lastName + "', userId = " + administrators.userId + " WHERE id = " + administrators.id);
+            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET first_name = '" + administrators.firstName + "', last_name = '" + administrators.lastName + "', user_id = " + administrators.userId + " WHERE id = " + administrators.id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,9 +77,7 @@ public class AdministratorsDao implements DAO<Administrators>{
     @Override
     public void delete(Administrators administrators) {
         try {
-            ResultSet temp = statement.executeQuery("SELECT \"user_id\" FROM \"" + TABLE_NAME + "\" WHERE id = " + administrators.id);
-            rs = statement.executeQuery("DELETE FROM \"USERS\" WHERE \"USERS\".id = " + temp.getInt("user_id"));
-            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + administrators.id);
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE \"id\" = " + administrators.id);
         } catch (Exception e) {
             e.printStackTrace();
         }

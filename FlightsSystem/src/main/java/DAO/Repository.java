@@ -17,6 +17,7 @@ public class Repository {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Flights", "postgres", "1");
+            System.out.println("Connected to the PostgreSQL server successfully.");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
