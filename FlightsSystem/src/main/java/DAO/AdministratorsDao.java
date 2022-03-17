@@ -76,6 +76,12 @@ public class AdministratorsDao implements DAO<Administrators>{
 
     @Override
     public void delete(Administrators administrators) {
-
+        try {
+            ResultSet temp = statement.executeQuery("SELECT \"user_id\" FROM \"" + TABLE_NAME + "\" WHERE id = " + administrators.id);
+            rs = statement.executeQuery("DELETE FROM \"USERS\" WHERE \"USERS\".id = " + temp.getInt("user_id"));
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + administrators.id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

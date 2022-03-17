@@ -21,7 +21,7 @@ public class CountriesDao implements DAO<Countries> {
     public Countries get(int id) {
         Countries country = null;
         try {
-            rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE id = " + id);
+            rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE \"id\" = " + id);
             rs.next();
             country = new Countries(
                     rs.getInt("id"),

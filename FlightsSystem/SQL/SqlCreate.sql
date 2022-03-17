@@ -1,18 +1,18 @@
 CREATE TABLE "Countries"(
-	"id" int GENERATED ALWAYS AS IDENTITY,
+	"id" serial,
 	"name" text UNIQUE NOT NULL,
 	"flag" bytea UNIQUE,                                     
 	PRIMARY KEY("id")
 );
 
 CREATE TABLE "User_Roles"(
-	"id" int GENERATED ALWAYS AS IDENTITY,
+	"id" serial,
 	"role_name" text UNIQUE NOT NULL,
 	PRIMARY KEY("id")
 );
 
 CREATE TABLE "Users"(
-	"id" bigint GENERATED ALWAYS AS IDENTITY,
+	"id" bigserial ,
 	"username" text UNIQUE NOT NULL,
 	"password" text NOT NULL,
 	"email" text UNIQUE NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE "Users"(
 );
 
 CREATE TABLE "Customers"(
-	"id" bigint GENERATED ALWAYS AS IDENTITY,
+	"id" bigserial,
 	"first_name" text NOT NULL,
 	"last_name" text NOT NULL,
 	"address" text NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE "Customers"(
 );
 
 CREATE TABLE "Administrators"(
-	"id" int GENERATED ALWAYS AS IDENTITY,
+	"id" serial,
 	"first_name" text NOT NULL,
 	"last_name" text NOT NULL,
 	"user_id" bigint UNIQUE NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE "Administrators"(
 );
 
 CREATE TABLE "Airline_Companies"(
-	"id" bigint GENERATED ALWAYS AS IDENTITY,
+	"id" bigserial,
 	"name" text UNIQUE NOT NULL,
 	"country_id" int NOT NULL,
 	"user_id" bigint UNIQUE NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE "Airline_Companies"(
 
 
 CREATE TABLE "Flights" (
-    "id" bigint GENERATED ALWAYS AS IDENTITY,
+    "id" bigserial,
     "airline_company_id" bigint NOT NULL,
     "origin_country_id" int NOT NULL,
 	"destination_country_id" int NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE "Flights" (
 	"remaining_tickets" int NOT NULL,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("airline_company_id") 
-	  REFERENCES "airline_companies"("id"),
+	  REFERENCES "Airline_Companies"("id"),
 	FOREIGN KEY("origin_country_id") 
 	  REFERENCES "Countries"("id"),
 	FOREIGN KEY("destination_country_id") 
@@ -80,7 +80,7 @@ CREATE TABLE "Flights" (
 );
 
 CREATE TABLE "Tickets"(
-	"id" bigint GENERATED ALWAYS AS IDENTITY,
+	"id" bigserial,
 	"flight_id" bigint NOT NULL,
 	"customer_id" bigint NOT NULL,
 	PRIMARY KEY("id"),
@@ -90,4 +90,12 @@ CREATE TABLE "Tickets"(
 	  REFERENCES "Customers"("id"),
 	UNIQUE("flight_id","customer_id")
 );
+
+ALTER SEQUENCE "User_Roles_id_seq" RESTART WITH 1;
+ALTER SEQUENCE "Countries_id_seq" RESTART WITH 1;
+ALTER SEQUENCE "Administrators_id_seq" RESTART WITH 1;
+ALTER SEQUENCE "Tickets_id_seq" RESTART WITH 1;
+ALTER SEQUENCE "Users_id_seq" RESTART WITH 1;
+ALTER SEQUENCE "Flights_id_seq" RESTART WITH 1;
+ALTER SEQUENCE "Airline_Companies_id_seq" RESTART WITH 1;
 
