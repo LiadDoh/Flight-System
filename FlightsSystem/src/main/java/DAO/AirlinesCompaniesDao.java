@@ -26,8 +26,8 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
             airlineCompany = new AirlineCompanies(
                     rs.getLong("id"),
                     rs.getString("name"),
-                    rs.getInt("countryId"),
-                    rs.getLong("userId")
+                    rs.getInt("country_id"),
+                    rs.getLong("user_id")
 
             );
         } catch (Exception e) {
@@ -44,8 +44,8 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
                 AirlineCompanies airlineCompany = new AirlineCompanies(
                         rs.getLong("id"),
                         rs.getString("name"),
-                        rs.getInt("countryId"),
-                        rs.getLong("userId")
+                        rs.getInt("country_id"),
+                        rs.getLong("user_id")
 
                 );
                 airlineCompanies.add(airlineCompany);
@@ -60,7 +60,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
     @Override
     public void add(AirlineCompanies airlineCompany) {
         try {
-            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (name, countryId, userId) VALUES ('" + airlineCompany.name + "', " + airlineCompany.countryId + ", " + airlineCompany.userId + ")");
+            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (name, country_id, user_id) VALUES ('" + airlineCompany.name + "', " + airlineCompany.countryId + ", " + airlineCompany.userId + ")");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,7 +69,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
     @Override
     public void update(AirlineCompanies airlineCompany) {
         try {
-            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET name = '" + airlineCompany.name + "', countryId = " + airlineCompany.countryId + ", userId = " + airlineCompany.userId + " WHERE id = " + airlineCompany.id);
+            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET name = '" + airlineCompany.name + "', country_id = " + airlineCompany.countryId + ", user_id = " + airlineCompany.userId + " WHERE id = " + airlineCompany.id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,10 +77,41 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
 
     @Override
     public void delete(AirlineCompanies airlineCompany) {
-//        try {
-//            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + countries.id);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            FlightsDao flightsDao = new FlightsDao();
+            flightsDao.deleteByAirlineCompanyId(airlineCompany.id);
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + airlineCompany.id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteByUserId(long userId) {
+        try {
+            AirlineCompanies airlineCompany = getByUserId(userId);
+            FlightsDao flightsDao = new FlightsDao();
+            flightsDao.deleteByAirlineCompanyId(airlineCompany.userId);
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE user_id = " + userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public AirlineCompanies getByUserId(long userId) {
+        AirlineCompanies airlineCompany = null;
+        try {
+            rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE user_id = " + userId);
+            rs.next();
+            airlineCompany = new AirlineCompanies(
+                    rs.getLong("id"),
+                    rs.getString("name"),
+                    rs.getInt("country_id"),
+                    rs.getLong("user_id")
+
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return airlineCompany;
     }
 }

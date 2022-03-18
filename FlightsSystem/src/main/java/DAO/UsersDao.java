@@ -1,6 +1,8 @@
 package DAO;
 
+import Models.Administrators;
 import Models.Countries;
+import Models.Customers;
 import Models.Users;
 
 import java.sql.Connection;
@@ -78,10 +80,25 @@ public class UsersDao implements DAO<Users> {
 
     @Override
     public void delete(Users user) {
-//        try {
-//            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + countries.id);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            switch (user.role) {
+                case 1:
+                    CustomersDao customersDao = new CustomersDao();
+                    Customers customer = customersDao.getByUserId(user.id);
+                    customersDao.deleteByUserId(customer);
+                    break;
+                case 2:
+                    AdministratorsDao administratorsDao = new AdministratorsDao();
+                    administratorsDao.deleteByUserId(user.id);
+                    break;
+                case 3:
+                    AirlinesCompaniesDao airlinesCompaniesDao = new AirlinesCompaniesDao();
+                    airlinesCompaniesDao.deleteByUserId(user.id);
+                    break;
+            }
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + user.id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

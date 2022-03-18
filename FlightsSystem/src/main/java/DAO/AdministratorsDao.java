@@ -82,4 +82,12 @@ public class AdministratorsDao implements DAO<Administrators>{
             e.printStackTrace();
         }
     }
+
+    public void deleteByUserId(long userId){
+        try {
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE user_id = " + userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

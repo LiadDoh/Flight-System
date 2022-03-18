@@ -75,6 +75,8 @@ public class CountriesDao implements DAO<Countries> {
     @Override
     public void delete(Countries country) {
         try {
+            FlightsDao flightsDao = new FlightsDao();
+            flightsDao.deleteByCountryId(country.id);
             rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + country.id);
         } catch (Exception e) {
             e.printStackTrace();

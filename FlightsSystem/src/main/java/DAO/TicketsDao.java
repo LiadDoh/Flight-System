@@ -25,8 +25,8 @@ public class TicketsDao implements DAO<Tickets> {
             rs.next();
             ticket = new Tickets(
                     rs.getLong("id"),
-                    rs.getLong("flightId"),
-                    rs.getLong("customerId")
+                    rs.getLong("flight_id"),
+                    rs.getLong("customer_id")
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,8 +41,8 @@ public class TicketsDao implements DAO<Tickets> {
             while (rs.next()) {
                 Tickets ticket = new Tickets(
                         rs.getLong("id"),
-                        rs.getLong("flightId"),
-                        rs.getLong("customerId")
+                        rs.getLong("flight_id"),
+                        rs.getLong("customer_id")
                 );
                 tickets.add(ticket);
             }
@@ -56,7 +56,7 @@ public class TicketsDao implements DAO<Tickets> {
     @Override
     public void add(Tickets ticket) {
         try {
-            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (flightId, customerId) VALUES (" + ticket.flightId + ", " + ticket.customerId + ")");
+            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (flight_id, customer_id) VALUES (" + ticket.flightId + ", " + ticket.customerId + ")");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class TicketsDao implements DAO<Tickets> {
     @Override
     public void update(Tickets ticket) {
         try {
-            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET flightId = " + ticket.flightId + ", customerId = " + ticket.customerId + " WHERE id = " + ticket.id);
+            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET flight_id = " + ticket.flightId + ", customer_id = " + ticket.customerId + " WHERE id = " + ticket.id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,10 +73,26 @@ public class TicketsDao implements DAO<Tickets> {
 
     @Override
     public void delete(Tickets ticket) {
-//        try {
-//            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + countries.id);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE id = " + ticket.id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteByCustomerId(long customerId) {
+        try {
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE \"customer_id\" = " + customerId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteByFlightId(long flightId) {
+        try {
+            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE \"flight_id\" = " + flightId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
