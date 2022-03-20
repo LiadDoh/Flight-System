@@ -17,6 +17,7 @@ public class CountriesDao implements DAO<Countries> {
     private Statement statement = repository.getStatement();
     private ResultSet rs = null;
 
+    //Get country by id
     @Override
     public Countries get(int id) {
         Countries country = null;
@@ -34,6 +35,7 @@ public class CountriesDao implements DAO<Countries> {
         return country;
     }
 
+    //Get all countries
     @Override
     public List<Countries> getAll() {
         try {
@@ -54,6 +56,7 @@ public class CountriesDao implements DAO<Countries> {
         return countries;
     }
 
+    //Add country
     @Override
     public void add(Countries country) {
         try {
@@ -63,6 +66,7 @@ public class CountriesDao implements DAO<Countries> {
         }
     }
 
+    //Update country
     @Override
     public void update(Countries country) {
         try {
@@ -72,6 +76,7 @@ public class CountriesDao implements DAO<Countries> {
         }
     }
 
+    //Delete country
     @Override
     public void delete(Countries country) {
         try {

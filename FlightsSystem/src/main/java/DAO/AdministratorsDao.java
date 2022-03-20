@@ -18,6 +18,7 @@ public class AdministratorsDao implements DAO<Administrators>{
     private Statement statement = repository.getStatement();
     private ResultSet rs = null;
 
+    //Get administrator by user id
     @Override
     public Administrators get(int id) {
         Administrators administrator = null;
@@ -35,7 +36,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         }
         return administrator;
     }
-
+    //Get all administrators
     @Override
     public List<Administrators> getAll() {
         try {
@@ -56,6 +57,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         return administrators;
     }
 
+    //Add administrator
     @Override
     public void add(Administrators administrators) {
         try {
@@ -65,6 +67,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         }
     }
 
+    //Update administrator
     @Override
     public void update(Administrators administrators) {
         try {
@@ -74,15 +77,20 @@ public class AdministratorsDao implements DAO<Administrators>{
         }
     }
 
+    //Delete administrator
     @Override
     public void delete(Administrators administrators) {
         try {
-            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE \"id\" = " + administrators.id);
+            UsersDao usersDao = new UsersDao();
+            Users user = usersDao.get((int)administrators.userId);
+            usersDao.delete(user);
+//            rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE \"id\" = " + administrators.id);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    //Get administrator by user id
     public void deleteByUserId(long userId){
         try {
             rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE user_id = " + userId);

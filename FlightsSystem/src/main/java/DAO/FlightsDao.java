@@ -3,9 +3,7 @@ package DAO;
 import Models.Flights;
 import Models.Users;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,7 @@ public class FlightsDao implements DAO<Flights> {
     private Statement statement = repository.getStatement();
     private ResultSet rs = null;
 
+    //Get flight by id
     @Override
     public Flights get(int id) {
         Flights flight = null;
@@ -39,6 +38,7 @@ public class FlightsDao implements DAO<Flights> {
         return flight;
     }
 
+    //Get all flights
     @Override
     public List<Flights> getAll() {
         try {
@@ -63,6 +63,7 @@ public class FlightsDao implements DAO<Flights> {
         return flights;
     }
 
+    //Add flight
     @Override
     public void add(Flights flight) {
         try {
@@ -72,6 +73,7 @@ public class FlightsDao implements DAO<Flights> {
         }
     }
 
+    //Update flight
     @Override
     public void update(Flights flight) {
         try {
@@ -81,6 +83,7 @@ public class FlightsDao implements DAO<Flights> {
         }
     }
 
+    //Delete flight and all its tickets
     @Override
     public void delete(Flights flight) {
         try {
@@ -92,6 +95,7 @@ public class FlightsDao implements DAO<Flights> {
         }
     }
 
+    //Delete flights by country id and all its tickets
     public void deleteByCountryId(int countryId) {
         try {
             List<Flights> flights = getByCountryId(countryId);
@@ -104,15 +108,22 @@ public class FlightsDao implements DAO<Flights> {
         }
     }
 
+    //Delete flights by airline company id and all its tickets
     public void deleteByAirlineCompanyId(long airlineCompanyId) {
         try {
+            List<Flights> flights = getFlightsByAirlineId(airlineCompanyId);
+            TicketsDao ticketsDao = new TicketsDao();
+            for(Flights flight : flights )
+                ticketsDao.deleteByFlightId(flight.id);
             rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE airline_company_id = " + airlineCompanyId);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    //Get flights by country id
     public List<Flights> getByCountryId(int countryId){
+        List<Flights> flightsByCountryId = new ArrayList<>();
         try {
             rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE origin_country_id = " + countryId + " OR destination_country_id = " + countryId);
             while (rs.next()) {
@@ -126,13 +137,162 @@ public class FlightsDao implements DAO<Flights> {
                         rs.getInt("remaining_tickets")
 
                 );
-                flights.add(flight);
+                flightsByCountryId.add(flight);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return flights;
+        return flightsByCountryId;
     }
 
+    //Get flights by airline company id
+    public List<Flights> getFlightsByAirlineId(long airlineCompanyId){
+        List<Flights> flightsByCompanyId = new ArrayList<>();
+
+        try {
+            rs = statement.executeQuery("SELECT * FROM get_flights_by_airline_id('"+airlineCompanyId+"')");
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByCompanyId.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByCompanyId;
+    }
+
+    //Get flights by departure time
+    public List<Flights> getFlightByDepartureDate(Date departureTime){
+        List<Flights> flightsByDepartureDate = new ArrayList<>();
+        try {
+            rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE DATE(departure_time) = " + departureTime);
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByDepartureDate.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByDepartureDate;
+    }
+
+    //Get flights by landing time
+    public List<Flights> getFlightByLandingDate(Date landingTime){
+        List<Flights> flightsByLandingTime = new ArrayList<>();
+
+        try {
+            rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE DATE(landing_time) = " + landingTime);
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByLandingTime.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByLandingTime;
+    }
+
+    //Get flights by origin country id
+    public List<Flights> getFlightsByOriginCountryId(int originCountryId){
+        List<Flights> flightsByOriginCountryId = new ArrayList<>();
+
+        try {
+            rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE origin_country_id = " + originCountryId);
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByOriginCountryId.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByOriginCountryId;
+    }
+
+    //Get flights by destination country id
+    public List<Flights> getFlightsByDestinationCountryId(int destinationCountryId){
+        List<Flights> flightsByDestinationCountryId = new ArrayList<>();
+
+        try {
+            rs = statement.executeQuery("SELECT * FROM \"" + TABLE_NAME + "\" WHERE destination_country_id = " + destinationCountryId);
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByDestinationCountryId.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByDestinationCountryId;
+    }
+
+    //Get flights by parameters
+    public List<Flights> getFlightsByParameters(int originCountryId, int destinationCountryId, Date departureTime){
+        List<Flights> flightsByParameters = new ArrayList<>();
+        try {
+            rs = statement.executeQuery("SELECT * FROM get_flights_by_parameters('" + originCountryId + "', '" + destinationCountryId + "', '" + departureTime + "')");
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByParameters.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByParameters;
+    }
+
+    public List<>
 
 }

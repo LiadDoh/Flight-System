@@ -32,7 +32,7 @@ $$
 
 
 create or replace function get_user_by_username(_username text)
-returns table("id" bigint,"username" text,"passsword" text,"email" text,"user_role" integer,"thumbnail" bytea)
+returns table("id" bigint,"username" text,"password" text,"email" text,"user_role" integer,"thumbnail" bytea)
 LANGUAGE plpgsql
 AS
 $$

@@ -8,15 +8,15 @@ public class Users implements POCO {
     public String username;
     public String password;
     public String email;
-    public int role;
+    public int user_role;
     public byte[] thumbnail;
 
-    public Users(long id, String username, String password, String email, int role, byte[] thumbnail) {
+    public Users(long id, String username, String password, String email, int user_role, byte[] thumbnail) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.user_role = user_role;
         this.thumbnail = thumbnail;
     }
 
@@ -27,7 +27,7 @@ public class Users implements POCO {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", user_role='" + user_role + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
                 '}';
     }

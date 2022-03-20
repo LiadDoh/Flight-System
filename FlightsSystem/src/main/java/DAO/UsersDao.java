@@ -19,6 +19,7 @@ public class UsersDao implements DAO<Users> {
     private Statement statement = repository.getStatement();
     private ResultSet rs = null;
 
+    // Get user by id
     @Override
     public Users get(int id) {
         Users user = null;
@@ -30,7 +31,7 @@ public class UsersDao implements DAO<Users> {
                     rs.getString("username"),
                     rs.getString("password"),
                     rs.getString("email"),
-                    rs.getInt("role"),
+                    rs.getInt("user_role"),
                     rs.getBytes("thumbnail")
             );
         } catch (Exception e) {
@@ -39,6 +40,7 @@ public class UsersDao implements DAO<Users> {
         return user;
     }
 
+    // Get all users
     @Override
     public List<Users> getAll() {
         try {
@@ -49,7 +51,7 @@ public class UsersDao implements DAO<Users> {
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        rs.getInt("role"),
+                        rs.getInt("user_role"),
                         rs.getBytes("thumbnail")
                 );
                 users.add(user);
@@ -61,27 +63,30 @@ public class UsersDao implements DAO<Users> {
         return users;
     }
 
+    // Add user
     @Override
     public void add(Users user) {
         try {
-            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (username, password, email, role, thumbnail) VALUES ('" + user.username + "', '" + user.password + "', '" + user.email + "', " + user.role + ", '" + user.thumbnail + "')");        } catch (Exception e) {
+            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (username, password, email, user_role, thumbnail) VALUES ('" + user.username + "', '" + user.password + "', '" + user.email + "', " + user.user_role + ", '" + user.thumbnail + "')");        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    // Update user
     @Override
     public void update(Users user) {
         try {
-            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET username = '" + user.username + "', password = '" + user.password + "', email = '" + user.email + "', role = " + user.role + ", thumbnail = '" + user.thumbnail + "' WHERE id = " + user.id);
+            rs = statement.executeQuery("UPDATE \"" + TABLE_NAME + "\" SET username = '" + user.username + "', password = '" + user.password + "', email = '" + user.email + "', user_role = " + user.user_role + ", thumbnail = '" + user.thumbnail + "' WHERE id = " + user.id);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    // Delete user
     @Override
     public void delete(Users user) {
         try {
-            switch (user.role) {
+            switch (user.user_role) {
                 case 1:
                     CustomersDao customersDao = new CustomersDao();
                     Customers customer = customersDao.getByUserId(user.id);
@@ -100,5 +105,25 @@ public class UsersDao implements DAO<Users> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Get user by username
+    public Users getByUsername(String username) {
+        Users user = null;
+        try {
+            rs = statement.executeQuery("SELECT * FROM get_user_by_username('" +username+ "')");
+            rs.next();
+            user = new Users(
+                    rs.getLong("id"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("email"),
+                    rs.getInt("user_role"),
+                    rs.getBytes("thumbnail")
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

@@ -17,6 +17,7 @@ public class TicketsDao implements DAO<Tickets> {
     private Statement statement = repository.getStatement();
     private ResultSet rs = null;
 
+    //Get all tickets by id
     @Override
     public Tickets get(int id) {
         Tickets ticket = null;
@@ -34,6 +35,7 @@ public class TicketsDao implements DAO<Tickets> {
         return ticket;
     }
 
+    //Get all tickets
     @Override
     public List<Tickets> getAll() {
         try {
@@ -53,6 +55,7 @@ public class TicketsDao implements DAO<Tickets> {
         return tickets;
     }
 
+    //Add new ticket
     @Override
     public void add(Tickets ticket) {
         try {
@@ -62,6 +65,7 @@ public class TicketsDao implements DAO<Tickets> {
         }
     }
 
+    //Update ticket
     @Override
     public void update(Tickets ticket) {
         try {
@@ -71,6 +75,7 @@ public class TicketsDao implements DAO<Tickets> {
         }
     }
 
+    //Delete ticket
     @Override
     public void delete(Tickets ticket) {
         try {
@@ -80,6 +85,7 @@ public class TicketsDao implements DAO<Tickets> {
         }
     }
 
+    //Delete tickets by customer id
     public void deleteByCustomerId(long customerId) {
         try {
             rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE \"customer_id\" = " + customerId);
@@ -88,6 +94,7 @@ public class TicketsDao implements DAO<Tickets> {
         }
     }
 
+    //Delete tickets by flight id
     public void deleteByFlightId(long flightId) {
         try {
             rs = statement.executeQuery("DELETE FROM \"" + TABLE_NAME + "\" WHERE \"flight_id\" = " + flightId);
