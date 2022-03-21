@@ -1,5 +1,6 @@
 package DAO;
 
+import Models.Flights;
 import Models.Tickets;
 import Models.Users;
 
@@ -101,5 +102,24 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //Get all tickets that belong to a customer
+    public List<Tickets> getTicketsByCustomer(long customerId){
+        List<Tickets> customerTickets = new ArrayList<>();
+        try {
+            rs = statement.executeQuery("SELECT * FROM get_tickets_by_customer('" + customerId +"')");
+            while (rs.next()) {
+                Tickets ticket = new Tickets(
+                        rs.getLong("id"),
+                        rs.getLong("flight_id"),
+                        rs.getLong("customer_id")
+                );
+                customerTickets.add(ticket);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return customerTickets;
     }
 }

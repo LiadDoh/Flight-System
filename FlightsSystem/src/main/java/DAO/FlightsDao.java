@@ -293,6 +293,52 @@ public class FlightsDao implements DAO<Flights> {
         return flightsByParameters;
     }
 
-    public List<>
+    //Get all flights that will land in a given country in the next 12 hours
+    public List<Flights> getArrivalFlights(int destinationCountryId){
+        List<Flights> flightsByArrivalTime = new ArrayList<>();
+        try {
+            rs = statement.executeQuery("SELECT * FROM get_arrival_flights('" + destinationCountryId +"')");
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByArrivalTime.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByArrivalTime;
+    }
+
+    //Get all flights that will depart from a given country in the next 12 hours
+    public List<Flights> getDepartureFlights(int originCountryId){
+        List<Flights> flightsByArrivalTime = new ArrayList<>();
+        try {
+            rs = statement.executeQuery("SELECT * FROM get_departure_flights('" + originCountryId +"')");
+            while (rs.next()) {
+                Flights flight = new Flights(
+                        rs.getLong("id"),
+                        rs.getLong("airline_company_id"),
+                        rs.getInt("origin_country_id"),
+                        rs.getInt("destination_country_id"),
+                        rs.getTimestamp("departure_time"),
+                        rs.getTimestamp("landing_time"),
+                        rs.getInt("remaining_tickets")
+
+                );
+                flightsByArrivalTime.add(flight);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flightsByArrivalTime;
+    }
 
 }
