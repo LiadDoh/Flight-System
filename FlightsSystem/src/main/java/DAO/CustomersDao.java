@@ -37,6 +37,7 @@ public class CustomersDao implements DAO<Customers> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return customer;
     }
 
@@ -61,7 +62,7 @@ public class CustomersDao implements DAO<Customers> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return customers;
     }
 
@@ -72,6 +73,7 @@ public class CustomersDao implements DAO<Customers> {
             rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (first_name, last_name, address, phone_no, credit_card_no, user_id) VALUES ('" + customer.firstName + "', '" + customer.lastName + "', '" + customer.address + "', '" + customer.phoneNo + "', '" + customer.creditCardNo + "', " + customer.userId + ")");     } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Update customer
@@ -82,6 +84,7 @@ public class CustomersDao implements DAO<Customers> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete customer
@@ -94,6 +97,7 @@ public class CustomersDao implements DAO<Customers> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete customer by user id
@@ -105,6 +109,7 @@ public class CustomersDao implements DAO<Customers> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Get customer by user id
@@ -128,6 +133,7 @@ public class CustomersDao implements DAO<Customers> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return customer;
     }
 
@@ -152,6 +158,7 @@ public class CustomersDao implements DAO<Customers> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return customer;
     }
 }

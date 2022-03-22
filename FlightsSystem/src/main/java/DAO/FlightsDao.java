@@ -35,6 +35,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flight;
     }
 
@@ -59,7 +60,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return flights;
     }
 
@@ -71,6 +72,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Update flight
@@ -81,6 +83,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete flight and all its tickets
@@ -93,6 +96,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete flights by country id and all its tickets
@@ -106,6 +110,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete flights by airline company id and all its tickets
@@ -119,6 +124,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Get flights by country id
@@ -142,6 +148,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByCountryId;
     }
 
@@ -167,6 +174,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByCompanyId;
     }
 
@@ -191,6 +199,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByDepartureDate;
     }
 
@@ -216,6 +225,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByLandingTime;
     }
 
@@ -241,6 +251,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByOriginCountryId;
     }
 
@@ -266,6 +277,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByDestinationCountryId;
     }
 
@@ -290,6 +302,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByParameters;
     }
 
@@ -314,6 +327,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByArrivalTime;
     }
 
@@ -338,6 +352,7 @@ public class FlightsDao implements DAO<Flights> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return flightsByArrivalTime;
     }
 

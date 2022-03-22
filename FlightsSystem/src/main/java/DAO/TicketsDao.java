@@ -33,6 +33,7 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return ticket;
     }
 
@@ -52,7 +53,7 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return tickets;
     }
 
@@ -64,6 +65,7 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Update ticket
@@ -74,6 +76,7 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete ticket
@@ -84,6 +87,7 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete tickets by customer id
@@ -102,6 +106,7 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Get all tickets that belong to a customer
@@ -120,6 +125,7 @@ public class TicketsDao implements DAO<Tickets> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return customerTickets;
     }
 }

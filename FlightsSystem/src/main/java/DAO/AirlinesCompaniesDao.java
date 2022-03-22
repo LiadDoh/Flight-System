@@ -36,6 +36,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return airlineCompany;
     }
 
@@ -57,7 +58,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return airlineCompanies;
     }
 
@@ -69,6 +70,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Update airline company
@@ -79,6 +81,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete airline company
@@ -94,6 +97,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete airline company by user id
@@ -106,6 +110,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Get airline company by user id
@@ -124,6 +129,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return airlineCompany;
     }
 
@@ -145,7 +151,7 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return airlineCompaniesByCountries;
     }
 
@@ -165,6 +171,29 @@ public class AirlinesCompaniesDao implements DAO<AirlineCompanies> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return airlineCompany;
+    }
+
+    //Get airline company by parameters
+    public List<AirlineCompanies> getByParameters(String name, int countryId) {
+        List<AirlineCompanies> airlineCompanies = new ArrayList<>();
+        try {
+            rs = statement.executeQuery("SELECT * FROM get_airline_by_parameters(\'" + name + "\', " + countryId + ")");
+            while (rs.next()) {
+                AirlineCompanies airlineCompany = new AirlineCompanies(
+                        rs.getLong("id"),
+                        rs.getString("name"),
+                        rs.getInt("country_id"),
+                        rs.getLong("user_id")
+
+                );
+                airlineCompanies.add(airlineCompany);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        repository.closeConnection();
+        return airlineCompanies;
     }
 }

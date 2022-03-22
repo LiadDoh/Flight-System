@@ -1,5 +1,9 @@
 package Facades;
 
+import DAO.AirlinesCompaniesDao;
+import DAO.CountriesDao;
+import DAO.FlightsDao;
+import DAO.UsersDao;
 import Models.AirlineCompanies;
 import Models.Countries;
 import Models.Flights;
@@ -10,40 +14,64 @@ import java.util.List;
 
 public abstract class FacadeBase {
 
-
     public List<Flights> getAllFlights() {
-        return null;
+        List<Flights> flights = null;
+        FlightsDao flightsDao = new FlightsDao();
+        flights = flightsDao.getAll();
+        return flights;
     }
 
-    public Flights getFlightById(long id) {
-        return null;
+    public Flights getFlightById(int id) {
+        Flights flights = null;
+        FlightsDao flightsDao = new FlightsDao();
+        flights = flightsDao.get(id);
+        return flights;
     }
 
     public List<Flights> getFlightsByParameter(int originCountryId, int destinationCountryId,Date departureDate) {
-        return null;
+        List<Flights> flights = null;
+        FlightsDao flightsDao = new FlightsDao();
+        flights = flightsDao.getFlightsByParameters(originCountryId,destinationCountryId,departureDate);
+        return flights;
     }
 
     public List<AirlineCompanies> getAllAirlines() {
-        return null;
+        List<AirlineCompanies> airlines = null;
+        AirlinesCompaniesDao airlinesCompaniesDao = new AirlinesCompaniesDao();
+        airlines = airlinesCompaniesDao.getAll();
+        return airlines;
     }
 
-    public AirlineCompanies getAirlineById(long id) {
-        return null;
+    public AirlineCompanies getAirlineById(int id) {
+        AirlineCompanies airlineCompanies = null;
+        AirlinesCompaniesDao airlinesCompaniesDao = new AirlinesCompaniesDao();
+        airlineCompanies = airlinesCompaniesDao.get(id);
+        return airlineCompanies;
     }
 
-    public List<AirlineCompanies> getAirlinesByParameter(String name, String countryId) {
-        return null;
+    public List<AirlineCompanies> getAirlinesByParameters(String name, int countryId) {
+        List<AirlineCompanies> airlines = null;
+        AirlinesCompaniesDao airlinesCompaniesDao = new AirlinesCompaniesDao();
+        airlines = airlinesCompaniesDao.getByParameters(name,countryId);
+        return airlines;
     }
 
     public List<Countries> getAllCountries() {
-        return null;
+        List<Countries> countries = null;
+        CountriesDao countriesDao = new CountriesDao();
+        countries = countriesDao.getAll();
+        return countries;
     }
 
     public Countries getCountryById(int id) {
-        return null;
+        Countries countries = null;
+        CountriesDao countriesDao = new CountriesDao();
+        countries = countriesDao.get(id);
+        return countries;
     }
 
     public void createNewUser(Users user) {
-
+        UsersDao usersDao = new UsersDao();
+        usersDao.add(user);
     }
 }

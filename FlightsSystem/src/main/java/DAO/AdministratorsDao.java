@@ -34,6 +34,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return administrator;
     }
     //Get all administrators
@@ -53,7 +54,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return administrators;
     }
 
@@ -65,6 +66,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Update administrator
@@ -75,6 +77,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete administrator
@@ -88,6 +91,7 @@ public class AdministratorsDao implements DAO<Administrators>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Get administrator by user id
@@ -97,5 +101,6 @@ public class AdministratorsDao implements DAO<Administrators>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 }

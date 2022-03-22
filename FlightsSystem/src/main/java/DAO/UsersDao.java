@@ -37,6 +37,7 @@ public class UsersDao implements DAO<Users> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return user;
     }
 
@@ -59,7 +60,7 @@ public class UsersDao implements DAO<Users> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return users;
     }
 
@@ -67,9 +68,11 @@ public class UsersDao implements DAO<Users> {
     @Override
     public void add(Users user) {
         try {
-            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (username, password, email, user_role, thumbnail) VALUES ('" + user.username + "', '" + user.password + "', '" + user.email + "', " + user.user_role + ", '" + user.thumbnail + "')");        } catch (Exception e) {
+            rs = statement.executeQuery("INSERT INTO \"" + TABLE_NAME + "\" (username, password, email, user_role, thumbnail) VALUES ('" + user.username + "', '" + user.password + "', '" + user.email + "', " + user.user_role + ", '" + user.thumbnail + "')");
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     // Update user
@@ -80,6 +83,7 @@ public class UsersDao implements DAO<Users> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     // Delete user
@@ -105,6 +109,7 @@ public class UsersDao implements DAO<Users> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     // Get user by username
@@ -124,6 +129,7 @@ public class UsersDao implements DAO<Users> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return user;
     }
 }

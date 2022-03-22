@@ -32,6 +32,7 @@ public class CountriesDao implements DAO<Countries> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
         return country;
     }
 
@@ -52,7 +53,7 @@ public class CountriesDao implements DAO<Countries> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        repository.closeConnection();
         return countries;
     }
 
@@ -64,6 +65,7 @@ public class CountriesDao implements DAO<Countries> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Update country
@@ -74,6 +76,7 @@ public class CountriesDao implements DAO<Countries> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 
     //Delete country
@@ -86,5 +89,6 @@ public class CountriesDao implements DAO<Countries> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        repository.closeConnection();
     }
 }
