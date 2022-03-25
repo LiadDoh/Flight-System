@@ -23,5 +23,4 @@ public class Administrators implements POCO{
                 ", userId='" + userId + '\'' +
                 '}';
     }
-
 }
