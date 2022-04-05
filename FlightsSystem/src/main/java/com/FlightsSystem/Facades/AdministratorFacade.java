@@ -1,12 +1,12 @@
-package Facades;
+package com.FlightsSystem.Facades;
 
-import DAO.AdministratorsDao;
-import DAO.AirlinesCompaniesDao;
-import DAO.CustomersDao;
-import DAO.UsersDao;
-import Models.Administrators;
-import Models.AirlineCompanies;
-import Models.Customers;
+import com.FlightsSystem.DAO.AdministratorsDao;
+import com.FlightsSystem.DAO.AirlinesCompaniesDao;
+import com.FlightsSystem.DAO.CustomersDao;
+import com.FlightsSystem.DAO.UsersDao;
+import com.FlightsSystem.Models.Administrators;
+import com.FlightsSystem.Models.AirlineCompanies;
+import com.FlightsSystem.Models.Customers;
 
 import java.util.List;
 
@@ -30,9 +30,9 @@ public class AdministratorFacade extends AnonymousFacade{
     public void addAirline(AirlineCompanies airlineCompany) {
         if(this.token.getRole()!=2)
             throw new IllegalArgumentException("You are not an administrator");
-        if(!checkInvalidAirline(airlineCompany))
+        if(checkInvalidAirline(airlineCompany))
             throw new IllegalArgumentException("Invalid Airline");
-        if(!checkUserExist(airlineCompany.userId))
+        if(checkUserExist(airlineCompany.userId))
             throw new IllegalArgumentException("User does not exist");
         AirlinesCompaniesDao airlineCompaniesDao = new AirlinesCompaniesDao();
         airlineCompaniesDao.add(airlineCompany);
@@ -44,7 +44,7 @@ public class AdministratorFacade extends AnonymousFacade{
             throw new IllegalArgumentException("You are not an administrator");
         if(!checkInvalidCustomer(customer))
             throw new IllegalArgumentException("Invalid Customer");
-        if(!checkUserExist(customer.userId))
+        if(checkUserExist(customer.userId))
             throw new IllegalArgumentException("User does not exist");
         CustomersDao customersDao = new CustomersDao();
         customersDao.add(customer);
@@ -85,17 +85,15 @@ public class AdministratorFacade extends AnonymousFacade{
     }
 
     private boolean checkInvalidAdministrator(Administrators administrator) {
-        if(administrator.firstName.length() < 2 || administrator.firstName ==null)
+        if( administrator.firstName ==null || administrator.firstName.length() < 2 )
             return false;
-        if(administrator.lastName.length() < 2 || administrator.lastName ==null)
+        if(administrator.lastName ==null || administrator.lastName.length() < 2 )
             return false;
-        if(checkUserExist(administrator.userId))
-            return false;
-        return true;
+        return checkUserExist(administrator.userId);
     }
 
     private boolean checkUserExist(long userId) {
         UsersDao usersDao = new UsersDao();
-        return usersDao.get((int)userId) != null;
+        return usersDao.get((int) userId) == null;
     }
 }

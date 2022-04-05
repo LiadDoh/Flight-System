@@ -1,13 +1,13 @@
-package Facades;
+package com.FlightsSystem.Facades;
 
-import DAO.AirlinesCompaniesDao;
-import DAO.CountriesDao;
-import DAO.FlightsDao;
-import DAO.UsersDao;
-import Models.AirlineCompanies;
-import Models.Countries;
-import Models.Flights;
-import Models.Users;
+import com.FlightsSystem.DAO.AirlinesCompaniesDao;
+import com.FlightsSystem.DAO.CountriesDao;
+import com.FlightsSystem.DAO.FlightsDao;
+import com.FlightsSystem.DAO.UsersDao;
+import com.FlightsSystem.Models.AirlineCompanies;
+import com.FlightsSystem.Models.Countries;
+import com.FlightsSystem.Models.Flights;
+import com.FlightsSystem.Models.Users;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.sql.Date;

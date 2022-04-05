@@ -1,11 +1,11 @@
-package Facades;
+package com.FlightsSystem.Facades;
 
-import DAO.CountriesDao;
-import DAO.CustomersDao;
-import DAO.UsersDao;
-import Models.AirlineCompanies;
-import Models.Customers;
-import Models.Users;
+import com.FlightsSystem.DAO.CountriesDao;
+import com.FlightsSystem.DAO.CustomersDao;
+import com.FlightsSystem.DAO.UsersDao;
+import com.FlightsSystem.Models.AirlineCompanies;
+import com.FlightsSystem.Models.Customers;
+import com.FlightsSystem.Models.Users;
 public class AnonymousFacade extends FacadeBase {
 
 
@@ -36,11 +36,11 @@ public class AnonymousFacade extends FacadeBase {
     }
 
     public boolean checkInvalidCustomer(Customers customer) {
-        if(customer.firstName.isEmpty() || customer.firstName.length()<2 || customer.firstName.length()>20)
+        if(customer.firstName.length() < 2 || customer.firstName.length() > 20)
             return false;
-        if(customer.lastName.isEmpty() || customer.lastName.length()<2 || customer.lastName.length()>30)
+        if(customer.lastName.length() < 2 || customer.lastName.length() > 30)
             return false;
-        if(customer.address.isEmpty() || customer.address.length()<5 || customer.address.length()>50)
+        if(customer.address.length() < 5 || customer.address.length() > 50)
             return false;
         String regexStr = "^(1\\-)?[0-9]{3}\\-?[0-9]{3}\\-?[0-9]{4}$";
         if(!customer.phoneNo.matches(regexStr))
@@ -56,28 +56,24 @@ public class AnonymousFacade extends FacadeBase {
     private boolean checkUserId(long userId) {
         UsersDao dao = new UsersDao();
         Users user = dao.get((int)userId);
-        if(user!=null||user.user_role!=1)
-            return true;
-        return false;
+        return user != null || user.user_role != 1;
     }
 
     public boolean checkInvalidAirline(AirlineCompanies airlineCompany) {
         if (airlineCompany.name == null || airlineCompany.name.isEmpty()) {
-            return false;
+            return true;
         }
         if (airlineCompany.countryId > 0) {
             CountriesDao countriesDao = new CountriesDao();
             if (countriesDao.get(airlineCompany.countryId) == null) {
-                return false;
+                return true;
             }
-            return false;
+            return true;
         }
         if (airlineCompany.userId > 0) {
             UsersDao usersDao = new UsersDao();
-            if (usersDao.get((int) airlineCompany.userId) == null) {
-                return false;
-            }
+            return usersDao.get((int) airlineCompany.userId) == null;
         }
-        return true;
+        return false;
     }
 }

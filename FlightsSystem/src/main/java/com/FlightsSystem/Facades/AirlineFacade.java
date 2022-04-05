@@ -1,10 +1,10 @@
-package Facades;
+package com.FlightsSystem.Facades;
 
-import DAO.AirlinesCompaniesDao;
-import DAO.CountriesDao;
-import DAO.FlightsDao;
-import Models.AirlineCompanies;
-import Models.Flights;
+import com.FlightsSystem.DAO.AirlinesCompaniesDao;
+import com.FlightsSystem.DAO.CountriesDao;
+import com.FlightsSystem.DAO.FlightsDao;
+import com.FlightsSystem.Models.AirlineCompanies;
+import com.FlightsSystem.Models.Flights;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class AirlineFacade extends AnonymousFacade {
 
     //Update the airline company info
     public void updateAirline(AirlineCompanies airlineCompanies) {
-        if (!checkInvalidAirline(airlineCompanies)) {
+        if (checkInvalidAirline(airlineCompanies)) {
             throw new IllegalArgumentException("Invalid airline company");
         }
         AirlinesCompaniesDao airlinesCompaniesDao = new AirlinesCompaniesDao();

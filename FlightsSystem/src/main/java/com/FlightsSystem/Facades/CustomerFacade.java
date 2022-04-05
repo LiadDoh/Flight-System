@@ -1,11 +1,11 @@
-package Facades;
+package com.FlightsSystem.Facades;
 
-import DAO.CustomersDao;
-import DAO.FlightsDao;
-import DAO.TicketsDao;
-import Models.Customers;
-import Models.Flights;
-import Models.Tickets;
+import com.FlightsSystem.DAO.CustomersDao;
+import com.FlightsSystem.DAO.FlightsDao;
+import com.FlightsSystem.DAO.TicketsDao;
+import com.FlightsSystem.Models.Customers;
+import com.FlightsSystem.Models.Flights;
+import com.FlightsSystem.Models.Tickets;
 
 import java.util.List;
 

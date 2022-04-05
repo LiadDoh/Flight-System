@@ -1,7 +1,8 @@
 import DAO.*;
 import Models.*;
+import com.FlightsSystem.DAO.FlightsDao;
+import com.FlightsSystem.Models.Flights;
 
-import java.sql.Date;
 import java.util.List;
 
 public class Main {
