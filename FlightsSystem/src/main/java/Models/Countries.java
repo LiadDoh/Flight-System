@@ -1,4 +1,4 @@
-package com.FlightsSystem.Models;
+package Models;
 
 public class Countries implements POCO{
 

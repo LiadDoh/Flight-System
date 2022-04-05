@@ -1,4 +1,4 @@
-package com.FlightsSystem.Facades;
+package Facades;
 
 public class LoginToken {
     private long id;

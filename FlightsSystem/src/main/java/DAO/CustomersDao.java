@@ -1,6 +1,7 @@
-package com.FlightsSystem.DAO;
+package DAO;
 
-import com.FlightsSystem.Models.Customers;
+import Models.Customers;
+import Models.Flights;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,4 +1,6 @@
-package com.FlightsSystem.Models;
+package Models;
+
+import java.util.Arrays;
 
 public class Users implements POCO {
 

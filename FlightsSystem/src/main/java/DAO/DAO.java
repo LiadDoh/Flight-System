@@ -1,4 +1,4 @@
-package com.FlightsSystem.DAO;
+package DAO;
 
 import java.util.List;
 

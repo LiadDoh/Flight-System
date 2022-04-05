@@ -1,7 +1,9 @@
-package com.FlightsSystem.DAO;
+package DAO;
 
-import com.FlightsSystem.Models.AirlineCompanies;
-import com.FlightsSystem.Models.Users;
+import Models.AirlineCompanies;
+import Models.Customers;
+import Models.Users;
+import org.apache.catalina.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

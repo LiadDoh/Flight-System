@@ -1,6 +1,7 @@
-package com.FlightsSystem.DAO;
+package DAO;
 
-import com.FlightsSystem.Models.Flights;
+import Models.Flights;
+import Models.Users;
 
 import java.sql.*;
 import java.util.ArrayList;

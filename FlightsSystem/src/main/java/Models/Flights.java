@@ -1,6 +1,7 @@
-package com.FlightsSystem.Models;
+package Models;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Flights implements POCO{
 

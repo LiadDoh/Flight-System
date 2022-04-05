@@ -1,4 +1,4 @@
-package com.FlightsSystem.Models;
+package Models;
 
 public class Customers implements POCO{
     public long id;

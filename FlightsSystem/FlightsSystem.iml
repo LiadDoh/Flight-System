@@ -20,18 +20,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/.." />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/test/java" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.6.4" level="project" />
@@ -61,7 +49,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.16" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.16" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.16" level="project" />
-    <orderEntry type="library" name="Maven: javax.validation:validation-api:2.0.0.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.6.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:2.6.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.6.4" level="project" />

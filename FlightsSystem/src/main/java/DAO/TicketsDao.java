@@ -1,6 +1,8 @@
-package com.FlightsSystem.DAO;
+package DAO;
 
-import com.FlightsSystem.Models.Tickets;
+import Models.Flights;
+import Models.Tickets;
+import Models.Users;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
