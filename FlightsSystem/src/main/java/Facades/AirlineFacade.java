@@ -24,7 +24,7 @@ public class AirlineFacade extends AnonymousFacade {
 
     //Update the airline company info
     public void updateAirline(AirlineCompanies airlineCompanies) {
-        if (!checkInvalidAirline(airlineCompanies)) {
+        if (checkInvalidAirline(airlineCompanies)) {
             throw new IllegalArgumentException("Invalid airline company");
         }
         AirlinesCompaniesDao airlinesCompaniesDao = new AirlinesCompaniesDao();

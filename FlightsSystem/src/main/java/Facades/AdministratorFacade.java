@@ -30,7 +30,7 @@ public class AdministratorFacade extends AnonymousFacade{
     public void addAirline(AirlineCompanies airlineCompany) {
         if(this.token.getRole()!=2)
             throw new IllegalArgumentException("You are not an administrator");
-        if(!checkInvalidAirline(airlineCompany))
+        if(checkInvalidAirline(airlineCompany))
             throw new IllegalArgumentException("Invalid Airline");
         if(!checkUserExist(airlineCompany.userId))
             throw new IllegalArgumentException("User does not exist");
