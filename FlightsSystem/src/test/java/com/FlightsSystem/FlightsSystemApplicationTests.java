@@ -1,10 +1,7 @@
 package com.FlightsSystem;
 
-import Models.Customers;
-import Models.Flights;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
