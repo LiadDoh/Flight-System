@@ -13,20 +13,22 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-
-    @GetMapping("/tickets")
+    //get all customer tickets
+    @GetMapping("/")
     public List<Tickets> getTickets(LoginToken token) {
         CustomerFacade customer = new CustomerFacade(token);
         return customer.getMyTickets();
     }
 
-    @PutMapping("/update")
+    //update customer
+    @PutMapping("/")
     public void update(@RequestBody Customers updatedCustomer, LoginToken token) {
         CustomerFacade customer = new CustomerFacade(token);
         customer.updateCustomer(updatedCustomer);
     }
 
-    @PostMapping("/addTicket")
+    //add ticket to customer
+    @PostMapping("/")
     public void addTicket(@RequestBody Tickets ticket, LoginToken token) {
         CustomerFacade customer = new CustomerFacade(token);
         customer.addTicket(ticket);
