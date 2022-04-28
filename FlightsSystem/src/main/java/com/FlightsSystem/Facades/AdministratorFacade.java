@@ -16,6 +16,7 @@ public class AdministratorFacade extends AnonymousFacade{
 
     public AdministratorFacade(LoginToken loginToken) {
         super();
+        this.token = loginToken;
     }
 
     //Get all customers from the database

@@ -15,6 +15,7 @@ public class CustomerFacade extends AnonymousFacade {
 
     public CustomerFacade(LoginToken loginToken) {
         super();
+        this.token = loginToken;
     }
 
     //Update customer information

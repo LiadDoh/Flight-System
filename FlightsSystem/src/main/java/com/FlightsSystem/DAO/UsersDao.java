@@ -119,7 +119,7 @@ public class UsersDao implements DAO<Users> {
             user = new Users(
                     rs.getLong("id"),
                     rs.getString("username"),
-                    rs.getString("password"),
+                    rs.getString(3),
                     rs.getString("email"),
                     rs.getInt("user_role"),
                     rs.getBytes("thumbnail")

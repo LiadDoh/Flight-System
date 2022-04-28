@@ -14,6 +14,7 @@ public class AirlineFacade extends AnonymousFacade {
 
     public AirlineFacade(LoginToken loginToken) {
         super();
+        this.token = loginToken;
     }
 
     //Get all flights of the airline company

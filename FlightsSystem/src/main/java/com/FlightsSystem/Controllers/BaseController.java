@@ -6,6 +6,7 @@ import com.FlightsSystem.Models.AirlineCompanies;
 import com.FlightsSystem.Models.Countries;
 import com.FlightsSystem.Models.Flights;
 import com.FlightsSystem.Models.Users;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
